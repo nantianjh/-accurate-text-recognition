@@ -1,0 +1,11 @@
+*.xcodeproj
+build/
+DerivedData/
+*.ipa
+TiYanGuan/Info.plist
+TiYanGuan/TiYanGuan.entitlements
+ShareExtension/Info.plist
+ShareExtension/ShareExtension.entitlements
+.DS_Store
+.arts/
+.codeartsdoer/
