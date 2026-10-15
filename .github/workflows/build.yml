@@ -11,6 +11,10 @@ on:
           - unsigned
           - signed-adhoc
           - signed-development
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - "**.md"
 
 jobs:
   build:
@@ -28,7 +32,7 @@ jobs:
         run: xcodegen generate
 
       - name: Build (unsigned)
-        if: ${{ inputs.mode == 'unsigned' }}
+        if: ${{ inputs.mode == 'unsigned' || github.event_name == 'push' }}
         run: |
           xcodebuild -project TiYanGuan.xcodeproj \
             -scheme TiYanGuan \
@@ -110,7 +114,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: TiYanGuan-${{ inputs.mode }}
+          name: TiYanGuan-${{ inputs.mode || 'unsigned' }}
           path: |
             *.ipa
           if-no-files-found: error
